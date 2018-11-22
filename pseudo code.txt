@@ -16,3 +16,4 @@ choice 2: 設1個轉折點, 其為(average(X[m]), average(Y[m]))向下取整
 choice 3: 設1個轉折點, 其為(sigma(i=1~m){X[i] * (sum(P[m]) - P[i]) / ((m-1)*sum(P[m])}, sigma(i=1~m){Y[i] * (sum(P[m]) - P[i]) / ((m-1)*sum(P[m])})向下取整 
 choice 4: 設2個轉折點, 第一個為choice2, 第二個為choice3
 choice 5: 設2個轉折點, 第一個為choice3, 第二個為choice2
+choice 6
