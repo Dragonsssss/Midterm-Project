@@ -21,7 +21,7 @@ int main()
 	int sx = 0, sy = 0, ex = 0, ey = 0;
 	cin >> sx >> sy >> ex >> ey;
 
-	
+	//this is a pig 
 	return 0;
 }
 
