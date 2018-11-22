@@ -1,1 +1,18 @@
+﻿int n //格子點 
+int m //威脅點個數 
+int w //轉折權重 
+int d //飛行距離上限
+int sx //起點x座標
+int sy //起點y座標
+int ex //終點x座標
+int ey //終點x座標
+int X[m] // 威脅點x座標
+int Y[m] // 威脅點y座標
+int R[m] // 威脅半徑 
+int P[m] // 威脅程度 
 
+choice 1: 從起點直接飛到終點 
+choice 2: 設1個轉折點, 其為(average(X[m]), average(Y[m]))向下取整 
+choice 3: 設1個轉折點, 其為(sigma(i=1~m){X[i] * (sum(P[m]) - P[i]) / ((m-1)*sum(P[m])}, sigma(i=1~m){Y[i] * (sum(P[m]) - P[i]) / ((m-1)*sum(P[m])})向下取整 
+choice 4: 設2個轉折點, 第一個為choice2, 第二個為choice3
+choice 5: 設2個轉折點, 第一個為choice3, 第二個為choice2
