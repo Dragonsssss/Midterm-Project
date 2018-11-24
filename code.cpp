@@ -32,29 +32,29 @@ int main()
 	Point start, end;
 	cin >> start.x >> start.y >> end.x >> end.y;
 	
-	const int NUMBER_choice = 5; // ¥Ø«e¦³5­Óchoice 
-	const int MAX_cp = 2; // ¦Ó¨ä¤¤³Ì¦h¦³2­Óchanging point
+	const int NUMBER_choice = 5; // ç›®å‰æœ‰5å€‹choice 
+	const int MAX_cp = 2; // è€Œå…¶ä¸­æœ€å¤šæœ‰2å€‹changing point
 	double lowest_routeCost = 0;
 	Point best_route[2*MAX_n] = {0};
 	int Cnt3 = 0;
 	for(int i = 1; i <= NUMBER_choice; i++)
 	{
-		// Âà§éÂI 
+		// è½‰æŠ˜é» 
 		Point changingpoint[MAX_cp] = {0};
-		int Cnt1 = generate_changingpoint(i, changingpoint, X, Y, R, P, d); // Cnt1¬°Âà§éÂI¼Æ¶q(ps. ¦pªG¸Ó¸ô½u¤£¥i¦æ«h¦^¶ÇCnt¬°0)
-		if(i != 1 and Cnt1 == 0) // ¸Ó¸ô½u¤£¥i¦æ 
+		int Cnt1 = generate_changingpoint(i, changingpoint, X, Y, R, P, d); // Cnt1ç‚ºè½‰æŠ˜é»æ•¸é‡(ps. å¦‚æœè©²è·¯ç·šä¸å¯è¡Œå‰‡å›å‚³Cntç‚º0)
+		if(i != 1 and Cnt1 == 0) // è©²è·¯ç·šä¸å¯è¡Œ 
 		{
 			continue;
 		}
 		
-		// ¸ô®|(»İ­pºâ­·ÀIªºÂI) 
+		// è·¯å¾‘(éœ€è¨ˆç®—é¢¨éšªçš„é») 
 		Point route[2*MAX_n] = {0};
-		int Cnt2 = generate_route(start, end, changingpoint, route, Cnt1); // Cnt2¬°»İ­pºâ­·ÀIªºÂIªº¼Æ¶q  
+		int Cnt2 = generate_route(start, end, changingpoint, route, Cnt1); // Cnt2ç‚ºéœ€è¨ˆç®—é¢¨éšªçš„é»çš„æ•¸é‡  
 		
-		// ¸ô®|­·ÀI 
+		// è·¯å¾‘é¢¨éšª 
 		double routeCost = calculate_routeCost(route, X, Y, R, P, Cnt2, w);
 		
-		// §ä¥X³Ì¨Î¸ô®|¨ÃÀx¦s¨äÂà§éÂI 
+		// æ‰¾å‡ºæœ€ä½³è·¯å¾‘ä¸¦å„²å­˜å…¶è½‰æŠ˜é» 
 		if(i == 1 or routeCost < lowest_routeCost)
 		{
 			lowest_routeCost = routeCost;
@@ -62,13 +62,13 @@ int main()
 			{
 				best_route[j].x = route[j].x;
 				best_route[j].y = route[j].x;
-				Cnt3 = Cnt1; // Cnt3¬°"³Ì¨Î¸ô½u"ªºÂà§éÂI¼Æ¶q
+				Cnt3 = Cnt1; // Cnt3ç‚º"æœ€ä½³è·¯ç·š"çš„è½‰æŠ˜é»æ•¸é‡
 			}	
 		}
 	}
 	
-	// ¿é¥Xµª®× 
-	if(Cnt3 == 0) //±q°_ÂI­¸¨ì²×ÂI 
+	// è¼¸å‡ºç­”æ¡ˆ 
+	if(Cnt3 == 0) //å¾èµ·é»é£›åˆ°çµ‚é» 
 	{
 		cout << 0;
 	}	
@@ -114,13 +114,13 @@ int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R
 		
 	}
 	
-	return Cnt1; // Cnt1¬°Âà§éÂI¼Æ¶q(ps. ¦pªG¸Ó¸ô½u¤£¥i¦æ«h¦^¶ÇCnt¬°0)
+	return Cnt1; // Cnt1ç‚ºè½‰æŠ˜é»æ•¸é‡(ps. å¦‚æœè©²è·¯ç·šä¸å¯è¡Œå‰‡å›å‚³Cntç‚º0)
 }
 int generate_route(Point start, Point end, Point changingpoint[], Point route[], int Cnt1)
 {
 	int Cnt2 = 0;
 	
-	return Cnt2; // Cnt2¬°»İ­pºâ­·ÀIªºÂIªº¼Æ¶q 
+	return Cnt2; // Cnt2ç‚ºéœ€è¨ˆç®—é¢¨éšªçš„é»çš„æ•¸é‡ 
 }
 double calculate_routeCost(Point route[], int X[], int Y[], int R[], int P[], int Cnt2, int w)
 {
