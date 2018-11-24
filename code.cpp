@@ -101,89 +101,90 @@ int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R
 	}
 	else if(i == 2)
 	{
-		int sum_x=0;
-		for(int j=0;j<m;j++)
 			sum_x+=X[j];
-		changingpoint[0].x=sum_x/m;
+		int sum_x = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_x += X[j] ;
+		changingpoint[0].x = sum_x / m ;
 		
-		int sum_y=0;
-		for(int j=0;j<m;j++)
-			sum_y+=Y[j];
-		changingpoint[0].y=sum_y/m;	
+		int sum_y = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_y += Y[j];
+		changingpoint[0].y = sum_y / m ;	
 		
 		return 1;
 	}
 	else if(i == 3)
 	{
-		int sum_p=0;
-		for(int j=0;j<m;j++)
-			sum_p+=P[j];
+		int sum_p = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_p += P[j];
 		
-		int sum_x=0;
-		for(int j=0;j<m;j++)
-			sum_x+=X[j]*(sum_p-P[j])/((m-1)*sum_p);
-		changingpoint[0].x=sum_x;
+		int sum_x = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_x += X[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
+		changingpoint[0].x = sum_x ;
 		
-		int sum_y=0;
-		for(int j=0;j<m;j++)
-			sum_y+=Y[j]*(sum_p-P[j])/((m-1)*sum_p);
-		changingpoint[0].y=sum_y;	
+		int sum_y = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_y += Y[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
+		changingpoint[0].y = sum_y ;	
 		
 		return 1;
 	}
 	else if(i == 4)
 	{
-		int sum_x=0;
-		for(int j=0;j<m;j++)
-			sum_x+=X[j];
-		changingpoint[0].x=sum_x/m;
+		int sum_x = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_x += X[j];
+		changingpoint[0].x = sum_x / m;
 		
-		int sum_y=0;
-		for(int j=0;j<m;j++)
-			sum_y+=Y[j];
-		changingpoint[0].y=sum_y/m;
+		int sum_y = 0 ;
+		for(int j = 0 ; j  < m ; j++)
+			sum_y += Y[j];
+		changingpoint[0].y = sum_y / m;
 		
-		int sum_p=0;
-		for(int j=0;j<m;j++)
-			sum_p+=P[j];
+		int sum_p = 0;
+		for(int j = 0 ; j <  m ; j++)
+			sum_p += P[j];
 		
-		sum_x=0;
-		for(int j=0;j<m;j++)
-			sum_x+=X[j]*(sum_p-P[j])/((m-1)*sum_p);
-		changingpoint[1].x=sum_x;
+		sum_x = 0;
+		for(int j = 0 ; j  < m ; j++)
+			sum_x += X[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
+		changingpoint[1].x = sum_x;
 		
-		sum_y=0;
-		for(int j=0;j<m;j++)
-			sum_y+=Y[j]*(sum_p-P[j])/((m-1)*sum_p);
-		changingpoint[1].y=sum_y;
+		sum_y = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_y += Y[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
+		changingpoint[1].y = sum_y;
 	
 		return 2;	
 	}
 	else if(i == 5)
 	{
-		int sum_p=0;
-		for(int j=0;j<m;j++)
-			sum_p+=P[j];
+		int sum_p = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_p += P[j];
 		
-		int sum_x=0;
-		for(int j=0;j<m;j++)
-			sum_x+=X[j]*(sum_p-P[j])/((m-1)*sum_p);
-		changingpoint[0].x=sum_x;
+		int sum_x = 0;
+		for(int j = 0 ; j < m ; j++)
+			sum_x += X[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
+		changingpoint[0].x = sum_x;
 		
-		int sum_y=0;
-		for(int j=0;j<m;j++)
-			sum_y+=Y[j]*(sum_p-P[j])/((m-1)*sum_p);
-		changingpoint[0].y=sum_y;
+		int sum_y = 0;
+		for(int j = 0 ; j < m ; j++)
+			sum_y += Y[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
+		changingpoint[0].y = sum_y;
 		
-		sum_x=0;
-		for(int j=0;j<m;j++)
-			sum_x+=X[j];
-		changingpoint[0].x=sum_x/m;
+		sum_x = 0;
+		for(int j = 0 ;  j < m ; j++)
+			sum_x += X[j];
+		changingpoint[0].x = sum_x / m;
 		
-		sum_y=0;
-		for(int j=0;j<m;j++)
-			sum_y+=Y[j];
-		changingpoint[0].y=sum_y/m;	
+		sum_y = 0;
+		for(int j = 0 ; j < m ; j++)
+			sum_y += Y[j];
+		changingpoint[0].y = sum_y / m;	
 		
 		return 2;
 	}
