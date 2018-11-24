@@ -42,6 +42,7 @@ int main()
 		// changing point
 		Point changingpoint[MAX_cp] = {0};
 		int Cnt1 = generate_changingpoint(i, changingpoint, X, Y, R, P, d, m); 
+//		cout<<changingpoint[0].x<<" "<<changingpoint[0].y<<" : "<<changingpoint[1].x<<" "<<changingpoint[1].y;
 		// Cnt1 is the quantity of changing points(if the point is unavailable, return 0)
 		if(i != 1 and Cnt1 == 0) // unavailable route
 		{
@@ -83,7 +84,7 @@ int main()
 		}
 		cout << best_route[Cnt3 - 1].x << " " << best_route[Cnt3 - 1].y;
 	}
-	
+
 	return 0;
 }
 
@@ -177,12 +178,12 @@ int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R
 		sum_x = 0;
 		for(int j = 0 ;  j < m ; j++)
 			sum_x += X[j];
-		changingpoint[0].x = sum_x / m;
+		changingpoint[1].x = sum_x / m;
 		
 		sum_y = 0;
 		for(int j = 0 ; j < m ; j++)
 			sum_y += Y[j];
-		changingpoint[0].y = sum_y / m;	
+		changingpoint[1].y = sum_y / m;	
 		
 		return 2;
 	}
