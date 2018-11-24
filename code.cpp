@@ -8,13 +8,13 @@ struct Point
 	double y;
 };
 
-const int NUMBER_choice = 5; //we have 5 choices now 
-const int MAX_cp = 2; //most changing point
+const int NUMBER_choice = 3; //we have 5 choices now 
+const int MAX_cp = 1; //most changing point
 
 double Distance(Point a, Point b);
 int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R[], int P[], int d, int m);
 int generate_route(Point start, Point end, Point changingpoint[], Point route[], int Cnt1);
-double calculate_routeCost(Point route[], int X[], int Y[], int R[], int P[], int Cnt2, int w);
+double calculate_routeCost(Point route[], int X[], int Y[], int R[], int P[], int Cnt2, int w, int m);
 int main()
 {
 	int n = 0, m = 0, w = 0, d = 0;
@@ -55,7 +55,7 @@ int main()
 		// Cnt2 is the quantity that need to calculate risk 
 
 		// route risk
-		double routeCost = calculate_routeCost(route, X, Y, R, P, Cnt2, w);
+		double routeCost = calculate_routeCost(route, X, Y, R, P, Cnt2, w, m);
 		
 		// find best route and save the changing point
 		if(i == 1 or routeCost < lowest_routeCost)
@@ -134,62 +134,6 @@ int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R
 		
 		return 1;
 	}
-	else if(i == 4)
-	{
-		int sum_x = 0 ;
-		for(int j = 0 ; j < m ; j++)
-			sum_x += X[j];
-		changingpoint[0].x = sum_x / m;
-		
-		int sum_y = 0 ;
-		for(int j = 0 ; j  < m ; j++)
-			sum_y += Y[j];
-		changingpoint[0].y = sum_y / m;
-		
-		int sum_p = 0;
-		for(int j = 0 ; j <  m ; j++)
-			sum_p += P[j];
-		
-		sum_x = 0;
-		for(int j = 0 ; j  < m ; j++)
-			sum_x += X[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
-		changingpoint[1].x = sum_x;
-		
-		sum_y = 0 ;
-		for(int j = 0 ; j < m ; j++)
-			sum_y += Y[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
-		changingpoint[1].y = sum_y;
-	
-		return 2;	
-	}
-	else if(i == 5)
-	{
-		int sum_p = 0 ;
-		for(int j = 0 ; j < m ; j++)
-			sum_p += P[j];
-		
-		int sum_x = 0;
-		for(int j = 0 ; j < m ; j++)
-			sum_x += X[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
-		changingpoint[0].x = sum_x;
-		
-		int sum_y = 0;
-		for(int j = 0 ; j < m ; j++)
-			sum_y += Y[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
-		changingpoint[0].y = sum_y;
-		
-		sum_x = 0;
-		for(int j = 0 ;  j < m ; j++)
-			sum_x += X[j];
-		changingpoint[1].x = sum_x / m;
-		
-		sum_y = 0;
-		for(int j = 0 ; j < m ; j++)
-			sum_y += Y[j];
-		changingpoint[1].y = sum_y / m;	
-		
-		return 2;
-	}
 }
 int generate_route(Point start, Point end, Point changingpoint[], Point route[], int Cnt1)
 {
@@ -246,7 +190,7 @@ double calculate_routeCost(Point route[], int X[], int Y[], int R[], int P[], in
 				routeRisk += P[i] * (R[i] - dist)/ R[i];
 		}
 	}
-	int routeCost = 0;
+	double routeCost = 0;
 	for (int i = 0; i < Cnt2; i ++)
 		routeCost = routeRisk + w * Cnt2; 
 	return routeCost;
