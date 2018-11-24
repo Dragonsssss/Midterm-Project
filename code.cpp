@@ -32,29 +32,30 @@ int main()
 	Point start, end;
 	cin >> start.x >> start.y >> end.x >> end.y;
 	
-	const int NUMBER_choice = 5; // 目前有5個choice 
-	const int MAX_cp = 2; // 而其中最多有2個changing point
+	const int NUMBER_choice = 5; //we have 5 choices now 
+	const int MAX_cp = 2; //most changing point
 	double lowest_routeCost = 0;
 	Point best_route[2*MAX_n] = {0};
 	int Cnt3 = 0;
 	for(int i = 1; i <= NUMBER_choice; i++)
 	{
-		// 轉折點 
+		// changing point
 		Point changingpoint[MAX_cp] = {0};
-		int Cnt1 = generate_changingpoint(i, changingpoint, X, Y, R, P, d); // Cnt1為轉折點數量(ps. 如果該路線不可行則回傳Cnt為0)
-		if(i != 1 and Cnt1 == 0) // 該路線不可行 
+		int Cnt1 = generate_changingpoint(i, changingpoint, X, Y, R, P, d); 
+		// Cnt1 is the quantity of changing points(if the point is unavailable, return 0)
+		if(i != 1 and Cnt1 == 0) // unavailable route
 		{
 			continue;
 		}
 		
-		// 路徑(需計算風險的點) 
+		// route(need to calculate risk)
 		Point route[2*MAX_n] = {0};
 		int Cnt2 = generate_route(start, end, changingpoint, route, Cnt1); // Cnt2為需計算風險的點的數量  
 		
-		// 路徑風險 
+		// route risk
 		double routeCost = calculate_routeCost(route, X, Y, R, P, Cnt2, w);
 		
-		// 找出最佳路徑並儲存其轉折點 
+		// find best route and save the changing point
 		if(i == 1 or routeCost < lowest_routeCost)
 		{
 			lowest_routeCost = routeCost;
@@ -62,13 +63,13 @@ int main()
 			{
 				best_route[j].x = route[j].x;
 				best_route[j].y = route[j].x;
-				Cnt3 = Cnt1; // Cnt3為"最佳路線"的轉折點數量
+				Cnt3 = Cnt1; // Cnt3 is the best number of changing point
 			}	
 		}
 	}
 	
-	// 輸出答案 
-	if(Cnt3 == 0) //從起點飛到終點 
+	// print answer
+	if(Cnt3 == 0) //from beg to end
 	{
 		cout << 0;
 	}	
@@ -114,13 +115,14 @@ int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R
 		
 	}
 	
-	return Cnt1; // Cnt1為轉折點數量(ps. 如果該路線不可行則回傳Cnt為0)
+	return Cnt1; 
+	// Cnt1 is the number of changing point if it is unavailable then return 0
 }
 int generate_route(Point start, Point end, Point changingpoint[], Point route[], int Cnt1)
 {
 	int Cnt2 = 0;
 	
-	return Cnt2; // Cnt2為需計算風險的點的數量 
+	return Cnt2; // Cnt2 is the changing point quantity that need to be calculate risk
 }
 double calculate_routeCost(Point route[], int X[], int Y[], int R[], int P[], int Cnt2, int w)
 {
