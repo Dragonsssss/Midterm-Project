@@ -50,8 +50,7 @@ int main()
 		
 		// route(need to calculate risk)
 		Point route[2*MAX_n] = {0};
-		int Cnt2 = generate_route(start, end, changingpoint, route, Cnt1); 
-		// Cnt2 is the quantity that need to calculate risk 
+		int Cnt2 = generate_route(start, end, changingpoint, route, Cnt1); // Cnt2為需計算風險的點的數量  
 		
 		// route risk
 		double routeCost = calculate_routeCost(route, X, Y, R, P, Cnt2, w);
@@ -116,13 +115,36 @@ int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R
 		
 	}
 	
-	return Cnt1;
+	return Cnt1; 
 	// Cnt1 is the number of changing point if it is unavailable then return 0
 }
 int generate_route(Point start, Point end, Point changingpoint[], Point route[], int Cnt1)
 {
 	int Cnt2 = 0;
-	
+	double Dst = 0, tmp = 0;
+	for(int i = 0; i < Cnt1; i++)
+	{
+		if(i == 0)
+		{
+			Dst = distance(start, changingpoint[0])
+			int xdif = changingpoint[0].x - start.x;
+			int ydif = changingpoint[0].y - start.y;
+			for(int j = 0; j < Dst - 1; j++)
+			{
+				route[Cnt].x = 
+			}
+		else if(i != Cnt - 1)
+		{
+			
+		}
+		else
+		{
+			
+		}
+			
+		}
+		
+	}
 	return Cnt2; // Cnt2 is the changing point quantity that need to be calculate risk
 }
 double calculate_routeCost(Point route[], int X[], int Y[], int R[], int P[], int Cnt2, int w)
