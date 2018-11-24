@@ -129,7 +129,7 @@ double calculate_routeCost(Point route[], int X[], int Y[], int R[], int P[], in
 {
 	//routecost = route risk + w(k - 1) 
 	//calculate routerisk
-	double routeRisk = 0;
+	double routeRisk = 0, dist = 0;
 	for (int i = 0; i < m; i ++)
 	{
 		for (int j = 0; j < Cnt2; j ++)
