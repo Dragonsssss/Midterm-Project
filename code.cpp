@@ -11,7 +11,7 @@ struct Point
 const int NUMBER_choice = 5; //we have 5 choices now 
 const int MAX_cp = 2; //most changing point
 
-double distance(Point a, Point b);
+double Distance(Point a, Point b);
 int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R[], int P[], int d);
 int generate_route(Point start, Point end, Point changingpoint[], Point route[], int Cnt1);
 double calculate_routeCost(Point route[], int X[], int Y[], int R[], int P[], int Cnt2, int w);
@@ -52,7 +52,7 @@ int main()
 		
 		// route(need to calculate risk)
 		Point route[2*MAX_n] = {0};
-		int Cnt2 = generate_route(start, end, changingpoint, route, Cnt1); // Cnt2為需計算風險的點的數量  
+		int Cnt2 = generate_route(start, end, changingpoint, route, Cnt1); // Cnt2?��?計�?風險?��??�數?? 
 		
 		// route risk
 		double routeCost = calculate_routeCost(route, X, Y, R, P, Cnt2, w);
@@ -88,7 +88,7 @@ int main()
 	return 0;
 }
 
-double distance(Point a, Point b)
+double Distance(Point a, Point b)
 {
 	return sqrt(pow((a.x - b.x), 2) + pow((a.y - b.y), 2)); 
 }
@@ -98,7 +98,9 @@ int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R
 	int Cnt1 = 0;
 	if(i == 1)
 	{
-		
+		changingpoint[0].x = 3;
+		changingpoint[0].y = 4;
+		Cnt1 = 1;
 	}
 	else if(i == 2)
 	{
@@ -122,9 +124,9 @@ int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R
 }
 int generate_route(Point start, Point end, Point changingpoint[], Point route[], int Cnt1)
 {
-	point totalpoint[MAX_cp + 2] = {0};
+	Point totalpoint[MAX_cp + 2] = {0};
 	totalpoint[0] = start;
-	totalpoint[cnt1+1] = end;
+	totalpoint[Cnt1+1] = end;
 	for(int i = 1; i <= Cnt1; i++)
 	{
 		totalpoint[i] = changingpoint[i-1];
@@ -133,27 +135,31 @@ int generate_route(Point start, Point end, Point changingpoint[], Point route[],
 	
 	int Cnt2 = 0;
 	double Dst = 0, tmp = 0;
-	for(int i = 0; i < Cnt1; i++)
+	for(int i = 0; i < Cnt1 - 1; i++)
 	{
-		if(i == 0)
+		Dst = Distance(totalpoint[i], totalpoint[i+1]);
+		int xdif = totalpoint[i+1].x - totalpoint[i].x;
+		int ydif = totalpoint[i+1].y - totalpoint[i].y;
+		if(tmp == 0)
 		{
-			Dst = distance(changingpoint[i], changingpoint[i+1]);
-			int xdif = changingpoint[i+1].x - changingpoint[i].x;
-			int ydif = changingpoint[i+1].y - changingpoint[i].y;
 			for(int j = 1; j <= Dst; j++)
 			{
-				route[Cnt2].x = changingpoint[i].x + xdif * j;
-				route[Cnt2].y = changingpoint[i].y + ydif * j;
+				route[Cnt2].x = totalpoint[i].x + j * xdif / Dst;
+				route[Cnt2].y = totalpoint[i].y + j * ydif / Dst;
 				Cnt2 += 1;
 			}
 			tmp = Dst - static_cast<int>(Dst);			
 		}
 		else
 		{
-			
+			for(int j = 1; j < Dst + tmp; j++)
+			{
+				route[Cnt2].x = totalpoint[i].x + (j - tmp) * xdif/ Dst;
+				route[Cnt2].y = totalpoint[i].y + (j - tmp) * ydif/ Dst;
+				Cnt2 += 1;
+			}
+			tmp = Dst + tmp - static_cast<int>(Dst+tmp);
 		}
-
-
 	}
 	return Cnt2; // Cnt2 is the changing point quantity that need to be calculate risk
 }
