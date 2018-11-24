@@ -94,13 +94,12 @@ double distance(Point a, Point b)
 
 int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R[], int P[], int d, int m)
 {
-	int Cnt1 = 0;
 	if(i == 1)
 	{
 		return 0;
 	}
 	else if(i == 2)
-	{		
+	{
 		int sum_x = 0 ;
 		for(int j = 0 ; j < m ; j++)
 			sum_x += X[j] ;
@@ -187,9 +186,6 @@ int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R
 		
 		return 2;
 	}
-	
-	return Cnt1;
-	// Cnt1 is the number of changing point if it is unavailable then return 0
 }
 int generate_route(Point start, Point end, Point changingpoint[], Point route[], int Cnt1)
 {
