@@ -163,7 +163,22 @@ int generate_route(Point start, Point end, Point changingpoint[], Point route[],
 	}
 	return Cnt2; // Cnt2 is the changing point quantity that need to be calculate risk
 }
-double calculate_routeCost(Point route[], int X[], int Y[], int R[], int P[], int Cnt2, int w)
+double calculate_routeCost(Point route[], int X[], int Y[], int R[], int P[], int Cnt2, int w, int m)
 {
-	
+	//routecost = route risk + w(k - 1) 
+	//calculate routerisk
+	double routeRisk = 0, dist = 0;
+	for (int i = 0; i < m; i ++)
+	{
+		for (int j = 0; j < Cnt2; j ++)
+		{
+			dist = sqrt(pow((route[j].x - X[i]), 2) + pow((route[j].y - Y[i]), 2));
+			if (R[i] - dist > 0)
+				routeRisk += P[i] * (R[i] - dist)/ R[i];
+		}
+	}
+	int routeCost = 0;
+	for (int i = 0; i < Cnt2; i ++)
+		routeCost = routeRisk + w * Cnt2; 
+	return routeCost;
 }
