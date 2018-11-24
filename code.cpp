@@ -100,7 +100,7 @@ int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R
 		return 0;
 	}
 	else if(i == 2)
-	{
+	{		
 		int sum_x = 0 ;
 		for(int j = 0 ; j < m ; j++)
 			sum_x += X[j] ;
