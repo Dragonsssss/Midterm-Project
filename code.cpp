@@ -8,11 +8,13 @@ struct Point
 	double y;
 };
 
+
 const int NUMBER_choice = 5; //we have 5 choices now 
 const int MAX_cp = 2; //most changing point
 
 double Distance(Point a, Point b);
-int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R[], int P[], int d);
+int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R[], int P[], int d, int m);
+
 int generate_route(Point start, Point end, Point changingpoint[], Point route[], int Cnt1);
 double calculate_routeCost(Point route[], int X[], int Y[], int R[], int P[], int Cnt2, int w);
 int main()
@@ -42,8 +44,11 @@ int main()
 	for(int i = 1; i <= NUMBER_choice; i++)
 	{
 		// changing point
+
 		Point changingpoint[MAX_cp+2] = {0};
-		int Cnt1 = generate_changingpoint(i, changingpoint, X, Y, R, P, d); 
+		int Cnt1 = generate_changingpoint(i, changingpoint, X, Y, R, P, d, m); 
+//		cout<<changingpoint[0].x<<" "<<changingpoint[0].y<<" : "<<changingpoint[1].x<<" "<<changingpoint[1].y;
+
 		// Cnt1 is the quantity of changing points(if the point is unavailable, return 0)
 		if(i != 1 and Cnt1 == 0) // unavailable route
 		{
@@ -52,7 +57,10 @@ int main()
 		
 		// route(need to calculate risk)
 		Point route[2*MAX_n] = {0};
-		int Cnt2 = generate_route(start, end, changingpoint, route, Cnt1); // Cnt2?ºé?è¨ˆç?é¢¨éšª?„é??„æ•¸?? 
+
+		int Cnt2 = generate_route(start, end, changingpoint, route, Cnt1); 
+		// Cnt2 is the quantity that need to calculate risk 
+
 		
 		// route risk
 		double routeCost = calculate_routeCost(route, X, Y, R, P, Cnt2, w);
@@ -84,7 +92,7 @@ int main()
 		}
 		cout << best_route[Cnt3 - 1].x << " " << best_route[Cnt3 - 1].y;
 	}
-	
+
 	return 0;
 }
 
@@ -93,34 +101,106 @@ double Distance(Point a, Point b)
 	return sqrt(pow((a.x - b.x), 2) + pow((a.y - b.y), 2)); 
 }
 
-int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R[], int P[], int d)
+int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R[], int P[], int d, int m)
 {
-	int Cnt1 = 0;
 	if(i == 1)
 	{
+
 		changingpoint[0].x = 3;
 		changingpoint[0].y = 4;
 		Cnt1 = 1;
+		
+		return 0;
+
 	}
 	else if(i == 2)
 	{
+		int sum_x = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_x += X[j] ;
+		changingpoint[0].x = sum_x / m ;
 		
+		int sum_y = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_y += Y[j];
+		changingpoint[0].y = sum_y / m ;	
+		
+		return 1;
 	}
 	else if(i == 3)
 	{
+		int sum_p = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_p += P[j];
 		
+		int sum_x = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_x += X[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
+		changingpoint[0].x = sum_x ;
+		
+		int sum_y = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_y += Y[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
+		changingpoint[0].y = sum_y ;	
+		
+		return 1;
 	}
 	else if(i == 4)
 	{
+		int sum_x = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_x += X[j];
+		changingpoint[0].x = sum_x / m;
 		
+		int sum_y = 0 ;
+		for(int j = 0 ; j  < m ; j++)
+			sum_y += Y[j];
+		changingpoint[0].y = sum_y / m;
+		
+		int sum_p = 0;
+		for(int j = 0 ; j <  m ; j++)
+			sum_p += P[j];
+		
+		sum_x = 0;
+		for(int j = 0 ; j  < m ; j++)
+			sum_x += X[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
+		changingpoint[1].x = sum_x;
+		
+		sum_y = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_y += Y[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
+		changingpoint[1].y = sum_y;
+	
+		return 2;	
 	}
 	else if(i == 5)
 	{
+		int sum_p = 0 ;
+		for(int j = 0 ; j < m ; j++)
+			sum_p += P[j];
 		
+		int sum_x = 0;
+		for(int j = 0 ; j < m ; j++)
+			sum_x += X[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
+		changingpoint[0].x = sum_x;
+		
+		int sum_y = 0;
+		for(int j = 0 ; j < m ; j++)
+			sum_y += Y[j] * (sum_p - P[j]) / ((m - 1) * sum_p);
+		changingpoint[0].y = sum_y;
+		
+		sum_x = 0;
+		for(int j = 0 ;  j < m ; j++)
+			sum_x += X[j];
+		changingpoint[1].x = sum_x / m;
+		
+		sum_y = 0;
+		for(int j = 0 ; j < m ; j++)
+			sum_y += Y[j];
+		changingpoint[1].y = sum_y / m;	
+		
+		return 2;
 	}
-	
-	return Cnt1; 
-	// Cnt1 is the number of changing point if it is unavailable then return 0
 }
 int generate_route(Point start, Point end, Point changingpoint[], Point route[], int Cnt1)
 {
