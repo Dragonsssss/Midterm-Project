@@ -4,9 +4,12 @@ using namespace std;
 
 struct Point
 {
-	int x;
-	int y;
+	double x;
+	double y;
 };
+
+const int NUMBER_choice = 5; //we have 5 choices now 
+const int MAX_cp = 2; //most changing point
 
 double distance(Point a, Point b);
 int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R[], int P[], int d);
@@ -32,15 +35,14 @@ int main()
 	Point start, end;
 	cin >> start.x >> start.y >> end.x >> end.y;
 	
-	const int NUMBER_choice = 5; //we have 5 choices now 
-	const int MAX_cp = 2; //most changing point
+
 	double lowest_routeCost = 0;
 	Point best_route[2*MAX_n] = {0};
 	int Cnt3 = 0;
 	for(int i = 1; i <= NUMBER_choice; i++)
 	{
 		// changing point
-		Point changingpoint[MAX_cp] = {0};
+		Point changingpoint[MAX_cp+2] = {0};
 		int Cnt1 = generate_changingpoint(i, changingpoint, X, Y, R, P, d); 
 		// Cnt1 is the quantity of changing points(if the point is unavailable, return 0)
 		if(i != 1 and Cnt1 == 0) // unavailable route
@@ -120,30 +122,38 @@ int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R
 }
 int generate_route(Point start, Point end, Point changingpoint[], Point route[], int Cnt1)
 {
+	point totalpoint[MAX_cp + 2] = {0};
+	totalpoint[0] = start;
+	totalpoint[cnt1+1] = end;
+	for(int i = 1; i <= Cnt1; i++)
+	{
+		totalpoint[i] = changingpoint[i-1];
+	}
+	Cnt1 += 2; // length of total point
+	
 	int Cnt2 = 0;
 	double Dst = 0, tmp = 0;
 	for(int i = 0; i < Cnt1; i++)
 	{
 		if(i == 0)
 		{
-			Dst = distance(start, changingpoint[0])
-			int xdif = changingpoint[0].x - start.x;
-			int ydif = changingpoint[0].y - start.y;
-			for(int j = 0; j < Dst - 1; j++)
+			Dst = distance(changingpoint[i], changingpoint[i+1]);
+			int xdif = changingpoint[i+1].x - changingpoint[i].x;
+			int ydif = changingpoint[i+1].y - changingpoint[i].y;
+			for(int j = 1; j <= Dst; j++)
 			{
-				route[Cnt].x = 
+				route[Cnt2].x = changingpoint[i].x + xdif * j;
+				route[Cnt2].y = changingpoint[i].y + ydif * j;
+				Cnt2 += 1;
 			}
-		else if(i != Cnt - 1)
-		{
-			
+			tmp = Dst - static_cast<int>(Dst);			
 		}
 		else
 		{
 			
 		}
-			
-		}
-		
+
+
 	}
 	return Cnt2; // Cnt2 is the changing point quantity that need to be calculate risk
 }
