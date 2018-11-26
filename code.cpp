@@ -12,7 +12,7 @@ const int NUMBER_choice = 3; //we have 3 choices now
 const int MAX_cp = 2; //most changing point
 
 double Distance(Point a, Point b);
-int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R[], int P[], int d, int m);
+int generate_changingpoint(Point start, int i, Point changingpoint[], int X[], int Y[], int R[], int P[], int d, int m);
 int generate_route(Point start, Point end, Point changingpoint[], Point route[], int Cnt1);
 double calculate_routeCost(Point route[], int X[], int Y[], int R[], int P[], int Cnt1, int Cnt2, int w, int m);
 int main()
@@ -21,8 +21,9 @@ int main()
 	cin >> n >> m >> w >> d;
 	
 	const int MAX_n = 1000;
+	const int MAX_m = 10000;
 	
-	int X[MAX_n] = {0}, Y[MAX_n] = {0}, R[MAX_n] = {0}, P[MAX_n] = {0};
+	int X[MAX_m] = {0}, Y[MAX_m] = {0}, R[MAX_m] = {0}, P[MAX_m] = {0};
 	for(int i = 0; i < m; i++)
 		cin >> X[i];
 	for(int i = 0; i < m; i++)
@@ -42,7 +43,7 @@ int main()
 	{
 		// changing point
 		Point changingpoint[MAX_cp] = {0};
-		int Cnt1 = generate_changingpoint(i, changingpoint, X, Y, R, P, d, m); 
+		int Cnt1 = generate_changingpoint(start, i, changingpoint, X, Y, R, P, d, m); 
 		// Cnt1 is the quantity of changing points(if the point is unavailable, return 0)
 		if(i != 1 and Cnt1 == 0) // unavailable route
 		{
@@ -93,12 +94,12 @@ double Distance(Point a, Point b)
 	return sqrt(pow((a.x - b.x), 2) + pow((a.y - b.y), 2)); 
 }
 
-int generate_changingpoint(int i, Point changingpoint[], int X[], int Y[], int R[], int P[], int d, int m)
+int generate_changingpoint(Point start, int i, Point changingpoint[], int X[], int Y[], int R[], int P[], int d, int m)
 {
 	if(i == 1)
 	{
-		changingpoint[0].x = 0;
-		changingpoint[0].y = 0;
+		changingpoint[0].x = start.x;
+		changingpoint[0].y = start.y;
 		
 		return 0;
 	}
